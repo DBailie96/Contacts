@@ -26,10 +26,6 @@ namespace Contacts.Pages
         {
             ContactList = await ContactService.GetContacts();
 
-            foreach(var contact in ContactList)
-            {
-                Console.WriteLine(contact.Age);
-            }
 
             pageLoading = false;
         }
