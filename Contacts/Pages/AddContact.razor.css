@@ -1,0 +1,21 @@
+﻿body {
+}
+
+
+.main-form{
+    height: 80vh;
+    width: 50%;
+    border-radius: 2px;
+    border: 0.5px solid black;
+}
+
+.form-section{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 10vh;
+    width: 100%;
+    padding-left: 50px;
+    padding-right: 150px;
+    text-align: left;
+}

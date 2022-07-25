@@ -1,0 +1,89 @@
+﻿@page "/mycontacts"
+@using MatBlazor
+@inject NavigationManager nav
+@inject IJSRuntime JSRuntime
+
+<div class="searchbar-area">
+    <i class="bi bi-search" style="height: 5vh;display: flex;align-items: center; margin-right: 10px;" ></i>
+    <input type="text" class="searchbar" placeholder="Search..." @bind="searchTerm"/>
+    <button class="btn" @onclick="() => SearchContacts(searchTerm)" style="height: 5vh; background-color: lightblue; margin-left: 10px;">Search</button>
+</div>
+
+@if(pageLoading)
+{
+    <h3>Loading contacts...</h3>
+}
+else if(ContactList.Count==0)
+{
+    <h3>No contacts, <a @onclick="NavToAddContact">add?</a></h3>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-bordered table-dark table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Surname</th>
+                    <th scope="col">Phone Number</th>
+                    <th scope="col">Date of Birth</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Options</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var contact in ContactList)
+                {
+                    <tr>
+                        <td class="align-middle">
+                            @contact.FirstName
+                        </td>
+                        <td class="align-middle">
+                            @contact.LastName
+                        </td>
+                        <td class="align-middle">
+                            @contact.PhoneNumber
+                        </td>
+                        <td class="align-middle">
+                            @contact.DateOfBirth
+                        </td>
+                        <td class="align-middle">
+                            @contact.Age
+                        </td>
+                        <td class="align-middle">
+                            @contact.Address
+                        </td>
+                        <td class="align-middle">
+                            <button class="btn-sm" @onclick="() => ContactOptions(contact)">Edit</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+<MatDialog @bind-IsOpen="optionsIsOpen">
+    <div class="dialog-body">
+        <div class="dialog-header">
+            <h4>@SelectedContact.FirstName @SelectedContact.LastName</h4>
+        </div>
+        <br />
+        <div class="dialog-number">
+            <h5>@SelectedContact.PhoneNumber</h5>
+        </div>
+        <div class="dialog-info">
+            <p>Age: @SelectedContact.Age</p>
+            <p>Address: @SelectedContact.Address</p>
+        </div>
+        <div class="dialog-buttons">
+            <button class="btn btn-success" @onclick="() => EditContact(SelectedContact.Id)">Edit</button>
+            <button class="btn btn-danger" @onclick="() => DeleteContact(SelectedContact.Id)" disabled="@isDeleting">Delete</button>
+        </div>
+    </div>
+</MatDialog>
+
+@code {
+
+}

@@ -1,0 +1,64 @@
+﻿@page "/addcontact/{contactid:int?}"
+@inject IJSRuntime JSRuntime
+@inject NavigationManager nav
+
+
+
+<div class="main-form">
+    <EditForm Model="newContact" OnValidSubmit="() => CreateContact(newContact)">
+        <DataAnnotationsValidator />
+
+        <div class="form-section">
+            @if(isEditForm)
+            {
+                <h3>Edit Contact</h3>
+                <hr />
+            }
+            else
+            {
+                <h3>Add Contact</h3>
+                <hr />
+            }
+        </div>
+
+        <div class="form-section">
+            <h4>First Name:</h4>
+            <InputText id="firstname" @bind-Value="newContact.FirstName" placeholder="First Name"/>
+        </div>
+        <div class="form-section">
+            <h4>Last Name:</h4>
+            <InputText id="lastname" @bind-Value="newContact.LastName"  placeholder="Last Name"/>
+        </div>
+        <div class="form-section">
+            <h4>Phone Number:</h4>
+            <InputText id="phonenumber" @bind-Value="newContact.PhoneNumber"  placeholder="Phone Number"/>
+        </div>
+        <div class="form-section">
+            <h4>Date of Birth:</h4>
+            <InputDate id="dateofbirth" @bind-Value="newContact.DateOfBirth"  placeholder="Birth Date"></InputDate>
+        </div>
+        <div class="form-section">
+            <h4>Address:</h4>
+            <InputText id="address" @bind-Value="newContact.Address"  placeholder="Address"/>
+        </div>
+
+        <div class="form-section">
+            @if(isEditForm)
+            {
+                <button type="submit" class="btn btn-success">Save</button>
+            }
+            else
+            {
+                <button type="submit" class="btn btn-success">Add</button>
+            }
+        </div>
+
+        <ValidationSummary></ValidationSummary>
+    </EditForm>
+</div>
+
+
+
+@code {
+
+}
